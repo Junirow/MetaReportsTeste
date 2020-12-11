@@ -1,0 +1,31 @@
+
+.form{
+  margin: auto;
+  margin-top: 18px;
+  width:50%;
+
+
+  mat-form-field{
+    font-size: 18px;
+    width: 50%
+
+  }
+
+  button{
+    background-color: #24e224;
+    color: white;
+    vertical-align: middle;
+    margin-left:18px;
+    margin-bottom: 16px;
+  }
+
+  span{
+    text-align:center;
+    color:red;
+  }
+}
+
+.table{
+  margin: auto;
+  width: 50%;
+}
