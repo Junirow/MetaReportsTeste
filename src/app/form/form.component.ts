@@ -1,14 +1,17 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CepServiceService } from '../cep-service.service';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 export interface PeriodicElement {
   uf: string;
-  cidade: string;
+  localidade: string;
   logradouro: string;
   CEP: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {uf: '', cidade:'', logradouro: '', CEP: ''}];
+  {uf: 'aaa', localidade:'', logradouro: '', CEP: ''}];
 
 
 
@@ -19,6 +22,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+
+
+  cepInput = new FormControl("", [Validators.required])
+  getErrorMessage() {
+    if (this.cepInput.hasError("required")) {
+      return "Este campo deve ser preenchido";
+    }
+
+    return this.cepInput.hasError("email") ? "Email inválido" : "";
+  }
 
   invalidCEP=''
   valueCEP='';
@@ -34,11 +47,44 @@ export class FormComponent implements OnInit {
 
   }
 
-  constructor() { }
+  constructor(private cepService:CepServiceService){}
+
+  findCEP(value:any, form:any){
+    this.cepService.searchCEP(value).subscribe((data)=> this.fillform(data,form));
+  }
+
+  fillform(data:any, form:any){
+    form.setValue({
+      cep: data.cep,
+      logradouro: data.logradouro,
+      uf: data.uf,
+      localidade: data.localidade
+    })
+  }
 
   ngOnInit(): void {
   }
-  displayedColumns: string[] = ['uf', 'cidade', 'logradouro', 'CEP'];
+  displayedColumns: string[] = ['uf', 'localidade', 'logradouro', 'CEP'];
   dataSource = ELEMENT_DATA;
+
+
+
+
+
+
+datas=[
+  {
+    cep:"cep",
+    logradouro:"logradouro",
+    uf:"uf",
+    localidade:"localidade"
+  }
+]
+
+
+
 }
+
+
+
 
