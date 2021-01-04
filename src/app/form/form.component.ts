@@ -2,17 +2,7 @@ import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CepServiceService } from '../cep-service.service';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
-export interface PeriodicElement {
-  uf: string;
-  localidade: string;
-  logradouro: string;
-  CEP: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {uf: 'aaa', localidade:'', logradouro: '', CEP: ''}];
-
+import { Cep } from './form.module';
 
 
 
@@ -22,6 +12,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+
+
+
+  items: Array<any>=[];
+  newItem:any={};
+
+  addItems() {
+    this.items.push(this.newItem);
+    console.log(this.items);
+    this.newItem = {};
+  }
+
+  removeItem(index:any) {
+    this.items.splice(index, 1); // remove 1 item at ith place
+  }
+
+
+  // validateForm(){
+
+  // }
+
+
+
+
+
+
+  cep: Cep={
+    logradouro: 'lala',
+    uf: 'll',
+    localidade:'lalaland'
+
+  }
+
+  ceps: Cep[]
 
 
   cepInput = new FormControl("", [Validators.required])
@@ -47,7 +71,12 @@ export class FormComponent implements OnInit {
 
   }
 
-  constructor(private cepService:CepServiceService){}
+  constructor(private cepService:CepServiceService){
+    this.ceps=[]
+  }
+
+
+
 
   findCEP(value:any, form:any){
     this.cepService.searchCEP(value).subscribe((data)=> this.fillform(data,form));
@@ -62,14 +91,18 @@ export class FormComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  createCep():void{
+    this.cepService.create(this.cep).subscribe(() => {
+      this.cepService.showMsg('Succes')
+    })
   }
-  displayedColumns: string[] = ['uf', 'localidade', 'logradouro', 'CEP'];
-  dataSource = ELEMENT_DATA;
 
-
-
-
+  ngOnInit(): void {
+    this.cepService.read().subscribe(ceps =>{
+      this.ceps = ceps
+      console.log(ceps)
+    })
+  }
 
 
 datas=[

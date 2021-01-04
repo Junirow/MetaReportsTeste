@@ -14,6 +14,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { CepComponent } from './cep/cep-create/cep.component';
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -22,7 +24,9 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent
+    FormComponent,
+    CepComponent,
+
   ],
   imports: [
     BrowserModule,

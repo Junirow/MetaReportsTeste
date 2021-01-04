@@ -1,31 +1,4 @@
 
-// .form{
-//   margin: auto;
-//   margin-top: 18px;
-//   width:50%;
-
-
-//   mat-form-field{
-//     font-size: 18px;
-//     width: 50%
-
-//   }
-
-//   button{
-//     background-color: #24e224;
-//     color: white;
-//     vertical-align: middle;
-//     margin-left:18px;
-//     margin-bottom: 16px;
-//   }
-
-//   span{
-//     text-align:center;
-//     color:red;
-//   }
-// }
-
-
 
 .form{
   margin: auto;
@@ -43,12 +16,12 @@
     button{
       margin-left:12px;
       color:white;
-      background-color: #2fd42f;
+      background-color: #b876f5;;
     }
   }
 
   table{
-    color: rgb(184, 118, 245);
+    color: #b876f5;
     font-size: large;
     td, th{
       padding:8px;
@@ -60,6 +33,11 @@
 
 
   }
+}
+
+.btn{
+  background-color: #2fd42f;
+  color:white;
 }
 
 
