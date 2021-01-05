@@ -14,10 +14,12 @@ export class CepServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //Função que resgata os valores do CEP da API
   searchCEP(cep:String){
     return this.httpClient.get(`https://viacep.com.br/ws/${cep}/json/`)
   }
 
+//Função que mostra uma mensagem
   showMsg(msg:string){
     console.log(msg)
   }

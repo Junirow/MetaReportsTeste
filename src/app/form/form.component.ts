@@ -14,40 +14,37 @@ import { Cep } from './form.module';
 export class FormComponent implements OnInit {
 
 
-
+//Criando um array items para conseguir guardar os dados referente ao CEP e
+// manipular estes dados para adicionar na tabela, e um objeto: newItem.
   items: Array<any>=[];
   newItem:any={};
 
+//Função que adiciona itens no array.
   addItems() {
     this.items.push(this.newItem);
     console.log(this.items);
     this.newItem = {};
   }
 
+  //Função que remove os itens do array.
   removeItem(index:any) {
-    this.items.splice(index, 1); // remove 1 item at ith place
+    this.items.splice(index, 1);
   }
-
-
-  // validateForm(){
-
-  // }
-
-
-
 
 
 
   cep: Cep={
-    logradouro: 'lala',
-    uf: 'll',
-    localidade:'lalaland'
+    logradouro: '',
+    uf: '',
+    localidade:''
 
   }
 
   ceps: Cep[]
 
 
+
+//Validação do campo de texto do CEP, se estiver vazio, uma mensagem de erro é acionada.
   cepInput = new FormControl("", [Validators.required])
   getErrorMessage() {
     if (this.cepInput.hasError("required")) {
@@ -71,17 +68,20 @@ export class FormComponent implements OnInit {
 
   }
 
+
+  //Método construtor com um array da classe Cep
   constructor(private cepService:CepServiceService){
     this.ceps=[]
   }
 
 
 
-
+//Função que puxa os dados da API referentes ao CEP.
   findCEP(value:any, form:any){
     this.cepService.searchCEP(value).subscribe((data)=> this.fillform(data,form));
   }
 
+//Função que preenche o logradouro, UF e a localidade de acordo com o CEP específico.
   fillform(data:any, form:any){
     form.setValue({
       cep: data.cep,
@@ -103,6 +103,8 @@ export class FormComponent implements OnInit {
       console.log(ceps)
     })
   }
+
+
 
 
 datas=[
